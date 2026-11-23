@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-canvas: #F7F5F0;
+  --color-surface: #FFFFFF;
+  --color-tray: #ECE8DF;
+  --color-stone-border: #E2DDD3;
+  --color-ink: #1C1B18;
+  --color-ink-muted: #635F57;
+  --color-cobalt: #1D4ED8;
+  --color-sage: #15803D;
+  --color-vermilion: #B91C1C;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono-typing {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tactile keycap bevel and press response */
+.keycap-surface {
+  box-shadow: 0 2px 0 0 rgba(28, 27, 24, 0.14), 0 1px 2px rgba(28, 27, 24, 0.06);
+  transition: transform 90ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 120ms ease,
+    border-color 120ms ease,
+    box-shadow 90ms ease;
+}
+
+.keycap-pressed {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 0 rgba(28, 27, 24, 0.14);
+}
+
+@keyframes keyShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+.animate-key-shake {
+  animation: keyShake 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .keycap-surface,
+  .keycap-pressed,
+  .animate-key-shake {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
